@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t davidtie/course-multi-docker-test -f client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true davidtie/course-multi-docker-test npm run test
+
+after_success:
+  - docker build -t davidtie/course-multi-docker-client ./client
+  - docker build -t davidtie/course-multi-docker-nginx  ./nginx
+  - docker build -t davidtie/course-multi-docker-server ./server
+  - docker build -t davidtie/course-multi-docker-worker ./worker
+  # Log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take the images and push them to docker hub
+  - docker push davidtie/course-multi-docker-client
+  - docker push davidtie/course-multi-docker-nginx
+  - docker push davidtie/course-multi-docker-server
+  - docker push davidtie/course-multi-docker-worker
