@@ -22,14 +22,14 @@ after_success:
   - docker push davidtie/course-multi-docker-server
   - docker push davidtie/course-multi-docker-worker
 
-deploy:
-  provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "course-multi-docker"
-  env: "Coursemultidocker-env"
-  bucket_name: "elasticbeanstalk-us-east-2-111711926468"
-  bucket_path: "course-multi-docker"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+#deploy:
+#  provider: elasticbeanstalk
+#  region: "us-east-2"
+#  app: "course-multi-docker"
+#  env: "Coursemultidocker-env"
+#  bucket_name: "elasticbeanstalk-us-east-2-111711926468"
+#  bucket_path: "course-multi-docker"
+#  on:
+#    branch: master
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key: $AWS_SECRET_KEY
